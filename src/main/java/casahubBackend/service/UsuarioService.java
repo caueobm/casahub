@@ -18,6 +18,7 @@ public class UsuarioService {
     // Cadastrar novo usuário
     public Usuario cadastrarUsuario(Usuario usuario) {
         if (usuarioRepository.existsByEmail(usuario.getEmail())) {
+
             throw new IllegalArgumentException("Email já está em uso.");
         }
         return usuarioRepository.save(usuario);
