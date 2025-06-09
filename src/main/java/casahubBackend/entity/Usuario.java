@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "usuarios")
@@ -23,11 +25,17 @@ public class Usuario {
 
     private String telefone;
 
-    @Column(name = "senha_hash", nullable = false)
-    private String senhaHash;
+    private String password;
 
-    @Column(name = "tipo_usuario", nullable = false)
-    private String tipoUsuario; // "corretor", "inquilino", "admin"
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(
+            name = "usuario_roles",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"usuario_id", "role"})
+    )
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private Set<RoleType> roles = new HashSet<>();
 
     @Column(name = "data_criacao")
     private LocalDateTime dataCriacao;
@@ -36,4 +44,5 @@ public class Usuario {
     protected void onCreate() {
         this.dataCriacao = LocalDateTime.now();
     }
+
 }

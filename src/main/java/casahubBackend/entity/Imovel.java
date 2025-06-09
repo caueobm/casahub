@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "imoveis")
@@ -55,6 +57,12 @@ public class Imovel {
 
     @Column(name = "data_cadastro")
     private LocalDateTime dataCadastro;
+
+    //Adiciona a tabela imovel_fotos
+    @ElementCollection
+    @CollectionTable(name = "foto_imoveis", joinColumns = @JoinColumn(name = "imovel_id"))
+    @Column(name = "foto")
+    private List<String> fotos = new ArrayList<>();
 
     @PrePersist
     protected void onCreate() {

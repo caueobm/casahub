@@ -2,6 +2,7 @@ package casahubBackend.seeder;
 
 import casahubBackend.entity.Imovel;
 import casahubBackend.entity.ImovelInteresse;
+import casahubBackend.entity.RoleType;
 import casahubBackend.entity.Usuario;
 import casahubBackend.repository.ImovelInteresseRepository;
 import casahubBackend.repository.ImovelRepository;
@@ -35,7 +36,7 @@ public class ImovelInteresseSeeder implements CommandLineRunner {
         if (interesseRepository.count() == 0) {
 
             List<Usuario> inquilinos = usuarioRepository.findAll().stream()
-                    .filter(u -> "inquilino".equalsIgnoreCase(u.getTipoUsuario()))
+                    .filter(u -> u.getRoles().contains(RoleType.ROLE_USER))
                     .toList();
 
             List<Imovel> imoveis = imovelRepository.findAll();
