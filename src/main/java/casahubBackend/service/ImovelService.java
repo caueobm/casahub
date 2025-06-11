@@ -114,6 +114,7 @@ public class ImovelService {
         return Files.probeContentType(caminho);
     }
 
+
 }
 
 

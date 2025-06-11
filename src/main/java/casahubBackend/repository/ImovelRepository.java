@@ -15,4 +15,5 @@ public interface ImovelRepository extends JpaRepository<Imovel, Long> {
 
     List<Imovel> findByDisponivelTrue(); // Todos disponíveis
 
+
 }

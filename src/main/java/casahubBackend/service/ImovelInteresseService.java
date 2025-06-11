@@ -26,6 +26,10 @@ public class ImovelInteresseService {
     public List<ImovelInteresse> buscarPorUsuario(Usuario usuario) {
         return interesseRepository.findByUsuario(usuario);
     }
+    // Buscar interesses de um imovel
+    public List<ImovelInteresse> buscarPorImoveis(List<Imovel> imoveis) {
+        return interesseRepository.findByImovelInWithFetch(imoveis);
+    }
 
     // Buscar usuários interessados em um imóvel
     public List<ImovelInteresse> buscarPorImovel(Imovel imovel) {
@@ -39,4 +43,7 @@ public class ImovelInteresseService {
         }
         interesseRepository.deleteById(id);
     }
+
+
+
 }
